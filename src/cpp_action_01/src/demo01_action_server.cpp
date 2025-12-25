@@ -1,5 +1,5 @@
 //*******************************
-//Action 三要素（Goal/Feedback/Result）
+//Action 三要素（Goal/Result/Feedback）
 //*******************************
 // ******************************
 // * 1.
@@ -59,8 +59,8 @@ class MinimalActionServer : public rclcpp::Node{
         }
         void execute(const std::shared_ptr<GoalHandleProgress> goal_handle){
             RCLCPP_INFO(this->get_logger(), "开始执行任务");
-            rclcpp::Rate loop_rate(10.0); //设置循环频率，即两个loop_rate.sleep()之间的时间间隔
-            const auto goal = goal_handle->get_goal(); //从goal_handle 中取出goal
+            rclcpp::Rate loop_rate(10.0); // 设置循环频率，即两个loop_rate.sleep()之间的时间间隔
+            const auto goal = goal_handle->get_goal(); // 从goal_handle 中取出goal
             auto feedback = std::make_shared<Progress::Feedback>();
             auto result = std::make_shared<Progress::Result>();
             int64_t sum = 0;
