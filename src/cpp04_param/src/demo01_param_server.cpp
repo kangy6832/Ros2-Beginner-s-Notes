@@ -7,9 +7,20 @@ ${workspaceFolder}/**
 /opt/ros/humble/include/rclcpp_action/**
 /opt/ros/humble/include/rclcpp
 */
+
+/*
+declare_parameter         初始化参数，设置默认值
+set_parameter             改变参数的值
+get_parameter             读取参数当前的值
+has_parameter             判断参数是否已声明/存在
+param.get_name()          获取Parameter对象的参数名
+param.value_to_string     将任意类型的参数值转为字符串
+undeclare_parameter       移除已声明的参数
+*/
 #include "rclcpp/rclcpp.hpp"
 class MinimalParamServer : public rclcpp::Node{
     public:
+        // 允许节点接收和处理未声明的参数
         MinimalParamServer():Node("minimal_param_server",rclcpp::NodeOptions().allow_undeclared_parameters(true)){}
         //声明函数
         void declare_param(){
@@ -31,6 +42,7 @@ class MinimalParamServer : public rclcpp::Node{
             RCLCPP_INFO(this->get_logger(),"包含car_type?%d",this->has_parameter("car_type"));
             RCLCPP_INFO(this->get_logger(),"包含car_typexxxx?%d",this->has_parameter("car_typexxxx"));
             //获取所有
+            // std::vector<rclcpp::Parameter> 容器
             auto params = this->get_parameters({"car_type","height","wheels"});
             for(auto &param : params){
                 RCLCPP_INFO(this->get_logger(),"name = %s , value = %s" ,param.get_name().c_str() , param.value_to_string().c_str());

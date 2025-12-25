@@ -67,19 +67,19 @@ class MinimalActionServer : public rclcpp::Node{
             for(int i = 1;(i <= goal->num) && rclcpp::ok(); i++){ 
                 sum += i;
                 if(goal_handle->is_canceling()){ //获得取消指令
-                    result->sum = sum;  //保存结果
-                    goal_handle->canceled(result); //通知取消并附带取消时的结果
+                    result->sum = sum;  // 保存结果
+                    goal_handle->canceled(result); // 通知取消并附带取消时的结果
                     RCLCPP_INFO(this->get_logger(),"任务取消");
                     return ;
                 }
                 feedback->progress = (double_t)i / goal->num; //(double_t)i：把整数 i 转换成浮点型
-                goal_handle->publish_feedback(feedback); //实时汇报进度
+                goal_handle->publish_feedback(feedback); // 实时汇报进度
                 RCLCPP_INFO(this->get_logger(),"连锁反馈中，进度%.2f",feedback->progress);
                 loop_rate.sleep();
             }
             if(rclcpp::ok()){
                 result->sum = sum;
-                goal_handle->succeed(result);//返回成功执行完的结果
+                goal_handle->succeed(result);  // 返回成功执行完的结果
                 RCLCPP_INFO(this->get_logger(),"任务完成！");
             }
         }

@@ -31,6 +31,7 @@ class MinimalParamClient : public rclcpp::Node {
         //查询参数
         void get_param(){
             RCLCPP_INFO(this->get_logger(),"-----------参数客户端查询参数-----------");
+            // get_parameter - 获取参数的基本函数  <double> - 模板参数，指定期望的返回类型  ("height") - 要获取的参数名称
             double height = paramClient->get_parameter<double>("height");
             RCLCPP_INFO(this->get_logger(),"height = %.2f",height);
             RCLCPP_INFO(this->get_logger(),"car_type存在吗? %d" , paramClient->has_parameter("car_type"));
