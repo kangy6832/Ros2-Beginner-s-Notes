@@ -12,6 +12,7 @@ find_package(tf2 REQUIRED)
 find_package(tf2_ros REQUIRED)
 find_package(geometry_msgs REQUIRED)
 find_package(turtlesim REQUIRED)
+find_package(tf2_geometry_msgs REQUIRED)
 
 add_executable(demo01_tf_listener src/demo01_tf_listener.cpp)
 ament_target_dependencies(
@@ -22,7 +23,20 @@ ament_target_dependencies(
   "geometry_msgs"
 )
 
-install(TARGETS demo01_tf_listener 
+add_executable(demo02_message_filter src/demo02_message_filter.cpp)
+ament_target_dependencies(
+  demo02_message_filter
+  "rclcpp"
+  "tf2"
+  "tf2_ros"
+  "geometry_msgs"
+  "tf2_geometry_msgs"
+  "message_filters"
+)
+
+install(TARGETS 
+  demo01_tf_listener 
+  demo02_message_filter
   DESTINATION lib/${PROJECT_NAME})
 
 if(BUILD_TESTING)
