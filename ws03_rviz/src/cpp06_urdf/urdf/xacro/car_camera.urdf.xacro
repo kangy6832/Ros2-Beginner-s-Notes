@@ -1,0 +1,28 @@
+<!-- 摄像头相关的 xacro 文件 -->
+<robot xmlns:xacro="http://wiki.ros.org/xacro">
+    <!-- 摄像头属性 -->
+    <xacro:property name="camera_x" value="0.012" />
+    <xacro:property name="camera_y" value="0.05" />
+    <xacro:property name="camera_z" value="0.01" />
+    <xacro:property name="camera_joint_x" value="${base_link_x/2 - camera_x/2}" />
+    <xacro:property name="camera_joint_y" value="0.0" />
+    <xacro:property name="camera_joint_z" value="${base_link_z / 2 + camera_z / 2}" />
+
+    <!-- 摄像头关节及link -->
+    <link name="camera">
+        <visual>
+            <geometry>
+                <box size="${camera_x} ${camera_y} ${camera_z}"/>
+            </geometry>
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+            <material name="red"/>
+        </visual>
+    </link>
+
+    <joint name="camera2baselink" type="fixed">
+        <parent link="base_link"/>
+        <child link="camera"/>
+        <origin xyz="${camera_joint_x} ${camera_joint_y} ${camera_joint_z}" rpy="0.0 0.0 0.0"/>
+    </joint>
+    
+</robot>

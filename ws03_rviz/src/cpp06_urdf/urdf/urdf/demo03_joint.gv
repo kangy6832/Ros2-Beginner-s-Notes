@@ -1,0 +1,11 @@
+digraph G {
+node [shape=box];
+"base_footprint" [label="base_footprint"];
+"base_link" [label="base_link"];
+"camera" [label="camera"];
+node [shape=ellipse, color=blue, fontcolor=blue];
+"base_footprint" -> "base_linkprint_to_base_link" [label="xyz: 0 0 0.15 \nrpy: 0 -0 0"]
+"base_linkprint_to_base_link" -> "base_link"
+"base_link" -> "cameraTobase_link" [label="xyz: 0.2 0 0.05 \nrpy: 0 -0 0"]
+"cameraTobase_link" -> "camera"
+}

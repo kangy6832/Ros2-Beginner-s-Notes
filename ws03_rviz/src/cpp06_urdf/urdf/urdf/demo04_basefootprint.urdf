@@ -1,0 +1,60 @@
+<!-- 
+1.创建底盘link
+2.创建摄像头link
+3.通过joint关联底盘与摄像头
+-->
+
+<robot name="demo03_joint">
+    <!-- 抽取颜色 -->
+    <material name="yellow">
+        <color rgba="0.8 0.8 0 0.8" />
+    </material>
+    <material name="red">
+        <color rgba="0.8 0.1 0.1 0.8" />
+    </material>
+    <!-- 设置初始化link -->
+    <link name="base_footprint">
+        <visual>
+            <geometry>
+                <!-- 球状 -->
+                <sphere radius="0.001"/>
+            </geometry>
+        </visual>
+    </link>
+    <link name="base_link">
+        <visual>
+            <geometry>
+                <box size="0.5 0.1 0.3"/>
+            </geometry>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <material name="yellow"/>
+        </visual>
+    </link>
+
+    <!-- 初始化link通过关节连接base_link，设置关节的偏移量，让base_link上移 -->
+    <joint name="base_linkprint_to_base_link" type="fixed">
+        <parent link="base_footprint"/>
+        <child link="base_link"/>
+        <origin xyz="0.0 0.0 0.15" rpy="0.0 0.0 0.0"/>
+    </joint>
+
+    <!-- 创建摄像头link -->
+    <link name="camera">
+        <visual>
+            <geometry>
+                <box size="0.02 0.05 0.05"/>
+            </geometry>
+            <material name="red"/>
+        </visual>
+    </link>
+    
+    <!-- 通过joint关联底盘和摄像头 -->
+    <joint name="cameraTobase_link" type="continuous">
+        <parent link="base_link"/>
+        <child link="camera"/>
+        <!-- 设置平移量和旋转度 -->
+        <origin xyz="0.2 0.0 0.05"/>
+        <!-- 沿哪个坐标轴旋转 -->
+        <axis xyz="0 0 1"/>
+    </joint>
+</robot>
