@@ -1,0 +1,9 @@
+int32 num1
+int32 num2
+int32 num3
+
+---
+
+bool ok_num1
+bool ok_num2
+bool ok_num3
